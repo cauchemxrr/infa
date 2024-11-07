@@ -1,0 +1,7 @@
+__pycache__/
+*.py[cod]
+*.pyd
+*.pyo
+*.swp
+.DS_Store
+265203265.py
