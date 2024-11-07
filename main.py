@@ -1,5 +1,6 @@
 import random
 from datetime import timedelta
+from decimal import Decimal, ROUND_HALF_DOWN
 
 # Плейлисты из задания
 playlist_a = [
@@ -41,8 +42,24 @@ def __get_random_songs(songs, n):
     return selected_songs
 
 
-def __calculate_total_time(selected_songs):
-    pass
+def __calculate_total_time(selected_songs:list) -> timedelta:
+    """ 
+    Суммирует общее время песен 
+
+    :param selected_songs: список песен
+    :type selected_songs: int
+
+    :return: время звучания
+    :rtype: timedelta
+    """
+    total_time = timedelta(minutes=0, seconds=0)
+    for song in selected_songs:
+        round_time = Decimal(song[1]).quantize(Decimal("1.00"), ROUND_HALF_DOWN)
+        _min, _sec = str(round_time).split(".")
+        res = timedelta(minutes=int(_min),seconds=int(_sec))
+        total_time = total_time + res
+                            
+    return total_time
 
 
 def get_duration(playlist, n):
