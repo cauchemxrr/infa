@@ -20,7 +20,7 @@ playlist_f = (
 )
 
 
-def extract_songs_from_playlist(playlist):
+def __extract_songs_from_playlist(playlist):
     if isinstance(playlist, list):  # Проверка типа плейлиста
         return playlist
     elif isinstance(playlist, tuple):
@@ -33,7 +33,7 @@ def extract_songs_from_playlist(playlist):
         raise ValueError("Неверный формат плейлиста")
 
 
-def get_random_songs(songs, n):
+def __get_random_songs(songs, n):
     if len(songs) < n:
         raise ValueError(f"Плейлист содержит меньше {n} песен")
 
@@ -41,15 +41,14 @@ def get_random_songs(songs, n):
     return selected_songs
 
 
-def calculate_total_time(selected_songs):
-    total_seconds = sum(duration for _, duration in selected_songs)
-    return timedelta(seconds=total_seconds)
+def __calculate_total_time(selected_songs):
+    pass
 
 
 def get_duration(playlist, n):
-    songs = extract_songs_from_playlist(playlist)
-    selected_songs = get_random_songs(songs, n)
-    total_time = calculate_total_time(selected_songs)
+    songs = __extract_songs_from_playlist(playlist)
+    selected_songs = __get_random_songs(songs, n)
+    total_time = __calculate_total_time(selected_songs)
     return total_time
 
 
