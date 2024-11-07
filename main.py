@@ -21,7 +21,16 @@ playlist_f = (
 )
 
 
-def __extract_songs_from_playlist(playlist):
+def __extract_songs_from_playlist(playlist: object) -> list:
+    """
+    Привести плейлист к одному типу данных
+
+    :param playlist: исходная коллекция с песнями
+    :type playlist: object
+
+    :return: весь список песен
+    :rtype: list
+    """
     if isinstance(playlist, list):  # Проверка типа плейлиста
         return playlist
     elif isinstance(playlist, tuple):
@@ -34,7 +43,19 @@ def __extract_songs_from_playlist(playlist):
         raise ValueError("Неверный формат плейлиста")
 
 
-def __get_random_songs(songs, n):
+def __get_random_songs(songs: list, n: int) -> list:
+    """
+    Выбрать случайные песни
+
+    :param songs: весь список песен
+    :type songs: list
+        
+    :param n: количество песен
+    :type n: int
+
+    :return: список случайных пар песен
+    :rtype: list
+    """
     if len(songs) < n:
         raise ValueError(f"Плейлист содержит меньше {n} песен")
 
@@ -46,8 +67,8 @@ def __calculate_total_time(selected_songs:list) -> timedelta:
     """ 
     Суммирует общее время песен 
 
-    :param selected_songs: список песен
-    :type selected_songs: int
+    :param selected_songs: список случайных пар песен
+    :type selected_songs: list
 
     :return: время звучания
     :rtype: timedelta
@@ -62,10 +83,22 @@ def __calculate_total_time(selected_songs:list) -> timedelta:
     return total_time
 
 
-def get_duration(playlist, n):
-    songs = __extract_songs_from_playlist(playlist)
-    selected_songs = __get_random_songs(songs, n)
-    total_time = __calculate_total_time(selected_songs)
+def get_duration(playlist: object, n: int) -> timedelta:
+    """
+    Функция принимает плейлист с песнями и временем звучания в виде коллекции и возвращает время звучания
+
+    :param playlist: исходная коллекция с песнями
+    :type playlist: object
+        
+    :param n: количество песен
+    :type n: int
+
+    :return: время звучания
+    :rtype: timedelta
+    """
+    songs = extract_songs_from_playlist(playlist)
+    selected_songs = get_random_songs(songs, n)
+    total_time = calculate_total_time(selected_songs)
     return total_time
 
 
